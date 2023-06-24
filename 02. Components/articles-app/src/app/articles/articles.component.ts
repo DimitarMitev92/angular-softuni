@@ -7,8 +7,8 @@ import { ArticleData } from '../data/data';
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.css'],
 })
-export class ArticlesComponent {
-  articles: Article[];
+export class ArticlesComponent implements OnInit {
+  articles: Article[] = [];
 
   constructor() {}
 
