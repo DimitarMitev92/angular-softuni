@@ -1,6 +1,6 @@
-<li>{{todo}}
-    <div class="tools">
-        <button class="complete"><i class="fas fa-check"></i></button>
+<li [ngClass]="isCheck ? 'completed' : ''">{{todo}}
+    <div class=" tools">
+        <button class="complete" (click)="onCheck()"><i class="fas fa-check"></i></button>
         <button class="edit">EDIT</button>
         <button class="delete" (click)="addDeletedItem(todo)"><i class="fas fa-times"></i></button>
     </div>
