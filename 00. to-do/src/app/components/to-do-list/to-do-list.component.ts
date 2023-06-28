@@ -6,5 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./to-do-list.component.css'],
 })
 export class ToDoListComponent {
+  index: number | undefined;
   @Input() todos!: string[];
+
+  deleteItem(deletedItem: string) {
+    this.index = this.todos.findIndex((el) => el == deletedItem);
+    this.todos.splice(this.index, 1);
+  }
 }

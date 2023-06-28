@@ -2,6 +2,7 @@
     <h3>List of Works Todo:</h3>
     <p class="error-info"></p>
     <ul>
-        <app-to-do-item *ngFor="let todo of todos" [todo]="todo"></app-to-do-item>
+        <app-to-do-item *ngFor="let todo of todos" [todo]="todo"
+            (deletedTodoEvent)="deleteItem($event)"></app-to-do-item>
     </ul>
 </div>
