@@ -1,31 +1,38 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { EditClickedService } from '../../../service/edit-clicked.service';
+import { Component, OnInit } from '@angular/core';
+import { FetchDataService } from '../../../services/fetch-data.service';
+import { Todo } from 'src/app/interfaces/todo';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-to-do-item',
   templateUrl: './to-do-item.component.html',
   styleUrls: ['./to-do-item.component.css'],
 })
-export class ToDoItemComponent {
-  isCheckClicked: boolean = false;
-  isEditClicked: boolean = false;
-  @Input() todo!: string;
-  @Output() deletedTodoEvent = new EventEmitter<string>();
+export class ToDoItemComponent implements OnInit {
+  todoList: Todo[] = [];
 
-  constructor(private editClickedService: EditClickedService) {}
+  constructor(private fetchDataService: FetchDataService) {}
 
-  onCheck() {
-    this.isCheckClicked = !this.isCheckClicked;
+  ngOnInit(): void {
+    this.fetchDataService.getData().subscribe((data) => (this.todoList = data));
   }
 
-  addDeletedItem(value: string) {
-    this.deletedTodoEvent.emit(value);
+  onCheckHandler(i: number) {
+    this.fetchDataService
+      .checkUpdate(i + 1, {
+        userId: this.todoList[i].userId,
+        id: this.todoList[i].id,
+        title: this.todoList[i].title,
+        completed: !this.todoList[i].completed,
+      })
+      .subscribe((data) => (this.todoList[i] = data));
   }
 
-  setEditClickedBoolean() {
-    this.isEditClicked = !this.isEditClicked;
-    this.editClickedService.setEditClickedValue(this.isEditClicked);
-    console.log('Clicked');
-    console.log(this.editClickedService.getEditClickedValue());
+  onEditHandler(i: number) {
+    console.log('Edit clicked');
+  }
+
+  onDeleteHandler(i: number) {
+    console.log('Delete clicked');
   }
 }

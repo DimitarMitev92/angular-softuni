@@ -1,7 +1,7 @@
-<li [ngClass]="isCheckClicked ? 'completed' : ''">{{todo}}
+<li *ngFor="let todo of todoList; index as i" [ngClass]="todo.completed ? 'completed': ''">{{todo.title}}
     <div class=" tools">
-        <button class="complete" (click)="onCheck()"><i class="fas fa-check"></i></button>
-        <button class="edit" (click)="setEditClickedBoolean()">EDIT</button>
-        <button class="delete" (click)="addDeletedItem(todo)"><i class="fas fa-times"></i></button>
+        <button class="complete" (click)="onCheckHandler(i)"><i class="fas fa-check"></i></button>
+        <button class="edit" (click)="onEditHandler(i)">EDIT</button>
+        <button class="delete" (click)="onDeleteHandler(i)"><i class="fas fa-times"></i></button>
     </div>
 </li>
