@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { EditClickedService } from '../../../service/edit-clicked.service';
 
 @Component({
   selector: 'app-to-do-item',
@@ -6,16 +7,25 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./to-do-item.component.css'],
 })
 export class ToDoItemComponent {
-  isCheck: boolean = false;
+  isCheckClicked: boolean = false;
+  isEditClicked: boolean = false;
   @Input() todo!: string;
   @Output() deletedTodoEvent = new EventEmitter<string>();
+
+  constructor(private editClickedService: EditClickedService) {}
+
+  onCheck() {
+    this.isCheckClicked = !this.isCheckClicked;
+  }
 
   addDeletedItem(value: string) {
     this.deletedTodoEvent.emit(value);
   }
 
-  onCheck() {
-    this.isCheck = true;
-    console.log(this.isCheck);
+  setEditClickedBoolean() {
+    this.isEditClicked = !this.isEditClicked;
+    this.editClickedService.setEditClickedValue(this.isEditClicked);
+    console.log('Clicked');
+    console.log(this.editClickedService.getEditClickedValue());
   }
 }

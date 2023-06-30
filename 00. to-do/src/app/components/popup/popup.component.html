@@ -1,4 +1,4 @@
-<div class="popup">
+<div class="popup" [ngStyle]="{ 'display': isEditClicked ? 'block' : 'none' }">
     <h3>Edit your todo:</h3>
     <div class="popup-body">
         <p class="popup-info"></p>
