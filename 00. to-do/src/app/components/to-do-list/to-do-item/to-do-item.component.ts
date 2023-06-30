@@ -33,6 +33,6 @@ export class ToDoItemComponent implements OnInit {
   }
 
   onDeleteHandler(i: number) {
-    console.log('Delete clicked');
+    this.fetchDataService.deleteData(i).subscribe((data) => console.log(data));
   }
 }

@@ -17,4 +17,9 @@ export class FetchDataService {
   checkUpdate(i: number, data: {}): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${i}`, data);
   }
+
+  deleteData(i: number): Observable<any> {
+    console.log('clicked');
+    return this.http.delete<any>(`${this.apiUrl}/${i}`);
+  }
 }
