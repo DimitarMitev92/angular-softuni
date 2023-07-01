@@ -14,6 +14,10 @@ export class FetchDataService {
     return this.http.get<any>(this.apiUrl);
   }
 
+  postData(data: {}): Observable<any> {
+    return this.http.post(this.apiUrl, data);
+  }
+
   checkUpdate(i: number, data: {}): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${i}`, data);
   }
